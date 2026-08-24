@@ -1,0 +1,706 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sridhar Precision Works - Scheduler</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                background: #f0f4f8;
+                color: #1a202c;
+                min-height: 100vh;
+                line-height: 1.6;
+            }
+
+            /* Modern Header with Gradient Animation */
+            .header {
+                background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+                color: white;
+                padding: 2.5rem 2rem;
+                position: relative;
+                overflow: hidden;
+                border-bottom: 4px solid #00d2ff;
+            }
+
+            .header::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle at 30% 50%, rgba(0, 210, 255, 0.1) 0%, transparent 60%);
+                animation: shimmer 8s ease-in-out infinite alternate;
+            }
+
+            @keyframes shimmer {
+                0% {
+                    transform: translateX(-20%) rotate(0deg);
+                }
+
+                100% {
+                    transform: translateX(20%) rotate(5deg);
+                }
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+                font-weight: 700;
+                letter-spacing: -0.5px;
+                position: relative;
+                z-index: 1;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .header h1::after {
+                content: '✦';
+                font-size: 1.5rem;
+                color: #00d2ff;
+                animation: pulse 2s ease-in-out infinite;
+            }
+
+            @keyframes pulse {
+
+                0%,
+                100% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+
+                50% {
+                    opacity: 0.5;
+                    transform: scale(0.9);
+                }
+            }
+
+            .header p {
+                position: relative;
+                z-index: 1;
+                opacity: 0.8;
+                font-weight: 300;
+                font-size: 1.05rem;
+            }
+
+            .container {
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+
+            /* Modern Metrics Grid - Glassmorphism style */
+            .metrics-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .metric-card {
+                background: white;
+                border-radius: 16px;
+                padding: 1.75rem;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+                border: 1px solid rgba(0, 0, 0, 0.04);
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .metric-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(90deg, #667eea, #764ba2);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .metric-card:hover::before {
+                opacity: 1;
+            }
+
+            .metric-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .metric-card.cost::before {
+                background: linear-gradient(90deg, #f093fb, #f5576c);
+            }
+
+            .metric-card.ontime::before {
+                background: linear-gradient(90deg, #4facfe, #00f2fe);
+            }
+
+            .metric-card.robust::before {
+                background: linear-gradient(90deg, #43e97b, #38f9d7);
+            }
+
+            .metric-card .icon {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+                display: block;
+            }
+
+            .metric-label {
+                font-size: 0.75rem;
+                font-weight: 600;
+                color: #4a5568;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                margin-bottom: 0.5rem;
+            }
+
+            .metric-value {
+                font-size: 2rem;
+                font-weight: 700;
+                color: #1a202c;
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .metric-card.cost .metric-value {
+                background: linear-gradient(135deg, #f093fb, #f5576c);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .metric-card.ontime .metric-value {
+                background: linear-gradient(135deg, #4facfe, #00f2fe);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .metric-card.robust .metric-value {
+                background: linear-gradient(135deg, #43e97b, #38f9d7);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            /* Modern Card Design */
+            .section {
+                background: white;
+                border-radius: 16px;
+                padding: 2rem;
+                margin-bottom: 2rem;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+                border: 1px solid rgba(0, 0, 0, 0.04);
+                transition: transform 0.2s ease, box-shadow 0.3s ease;
+            }
+
+            .section:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            }
+
+            .section h2 {
+                font-size: 1.4rem;
+                font-weight: 600;
+                margin-bottom: 1.5rem;
+                color: #1a202c;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                border-bottom: none;
+                padding-bottom: 0.75rem;
+                border-bottom: 3px solid #e2e8f0;
+            }
+
+            .section h2::before {
+                content: '';
+                display: inline-block;
+                width: 4px;
+                height: 24px;
+                background: linear-gradient(180deg, #667eea, #764ba2);
+                border-radius: 4px;
+            }
+
+            /* Modern Table Design */
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 0 -0.5rem;
+                padding: 0 0.5rem;
+                border-radius: 12px;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: separate;
+                border-spacing: 0;
+                border-radius: 12px;
+                overflow: hidden;
+                min-width: 650px;
+            }
+
+            th {
+                background: #f7fafc;
+                padding: 1rem 1.25rem;
+                text-align: left;
+                font-weight: 600;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: #4a5568;
+                border-bottom: 2px solid #e2e8f0;
+            }
+
+            td {
+                padding: 1rem 1.25rem;
+                border-bottom: 1px solid #edf2f7;
+                font-size: 0.95rem;
+                vertical-align: middle;
+            }
+
+            tr:last-child td {
+                border-bottom: none;
+            }
+
+            tr:hover td {
+                background: #f7fafc;
+            }
+
+            .time {
+                font-family: 'JetBrains Mono', 'Courier New', monospace;
+                font-size: 0.85rem;
+                color: #4a5568;
+                font-weight: 500;
+            }
+
+            /* Modern Status Badges */
+            .status-badge {
+                display: inline-block;
+                padding: 0.35rem 1rem;
+                border-radius: 50px;
+                font-size: 0.75rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+                transition: all 0.3s ease;
+            }
+
+            .status-badge:hover {
+                transform: scale(1.05);
+            }
+
+            .status-on-time {
+                background: linear-gradient(135deg, #c6f6d5, #9ae6b4);
+                color: #22543d;
+                box-shadow: 0 2px 8px rgba(72, 187, 120, 0.2);
+            }
+
+            .status-late {
+                background: linear-gradient(135deg, #fed7d7, #feb2b2);
+                color: #742a2a;
+                box-shadow: 0 2px 8px rgba(245, 101, 101, 0.2);
+            }
+
+            .status-critical {
+                background: linear-gradient(135deg, #feb2b2, #fc8181);
+                color: #742a2a;
+                box-shadow: 0 2px 8px rgba(245, 101, 101, 0.3);
+                animation: critical-pulse 2s ease-in-out infinite;
+            }
+
+            @keyframes critical-pulse {
+
+                0%,
+                100% {
+                    box-shadow: 0 2px 8px rgba(245, 101, 101, 0.3);
+                }
+
+                50% {
+                    box-shadow: 0 2px 16px rgba(245, 101, 101, 0.6);
+                }
+            }
+
+            .no-data {
+                text-align: center;
+                padding: 3rem 2rem;
+                color: #a0aec0;
+                font-style: italic;
+                background: #f7fafc;
+                border-radius: 12px;
+                border: 2px dashed #e2e8f0;
+                font-size: 1.05rem;
+            }
+
+            .no-data h2 {
+                font-size: 1.5rem;
+                color: #4a5568;
+                margin-bottom: 0.5rem;
+                font-style: normal;
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+
+            .no-data h2::before {
+                display: none;
+            }
+
+            .no-data p {
+                margin: 0.5rem 0;
+            }
+
+            .no-data code {
+                background: #edf2f7;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                font-family: 'JetBrains Mono', 'Courier New', monospace;
+                font-size: 0.9rem;
+                color: #2d3748;
+                display: inline-block;
+                margin-top: 0.5rem;
+            }
+
+            /* Action Buttons */
+            .action-buttons {
+                display: flex;
+                gap: 1rem;
+                margin-top: 2rem;
+                flex-wrap: wrap;
+            }
+
+            .btn {
+                padding: 0.6rem 1.5rem;
+                border: none;
+                border-radius: 50px;
+                font-size: 0.9rem;
+                font-weight: 600;
+                cursor: pointer;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                transition: all 0.3s ease;
+            }
+
+            .btn-primary {
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+                box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+            }
+
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            }
+
+            .btn-primary::after {
+                content: '→';
+                transition: transform 0.3s ease;
+            }
+
+            .btn-primary:hover::after {
+                transform: translateX(4px);
+            }
+
+            .btn-secondary {
+                background: #edf2f7;
+                color: #4a5568;
+                border: 1px solid #e2e8f0;
+            }
+
+            .btn-secondary:hover {
+                background: #e2e8f0;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+
+            .btn-success {
+                background: linear-gradient(135deg, #48bb78, #38a169);
+                color: white;
+                box-shadow: 0 2px 10px rgba(72, 187, 120, 0.3);
+            }
+
+            .btn-success:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 20px rgba(72, 187, 120, 0.4);
+            }
+
+            /* Footer */
+            .footer {
+                text-align: center;
+                padding: 2.5rem 2rem;
+                color: #4a5568;
+                border-top: 1px solid #edf2f7;
+                margin-top: 2rem;
+                font-size: 0.9rem;
+                background: white;
+                border-radius: 16px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            }
+
+            .footer p {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+
+            .footer span {
+                color: #667eea;
+                font-weight: 600;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .header h1 {
+                    font-size: 1.5rem;
+                    flex-wrap: wrap;
+                }
+
+                .header h1::after {
+                    font-size: 1rem;
+                }
+
+                .container {
+                    padding: 1rem;
+                }
+
+                .section {
+                    padding: 1.25rem;
+                    border-radius: 12px;
+                }
+
+                .section h2 {
+                    font-size: 1.2rem;
+                }
+
+                .metrics-grid {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1rem;
+                }
+
+                .metric-card {
+                    padding: 1.25rem;
+                }
+
+                .metric-value {
+                    font-size: 1.5rem;
+                }
+
+                th,
+                td {
+                    padding: 0.75rem;
+                    font-size: 0.85rem;
+                }
+
+                .action-buttons {
+                    flex-direction: column;
+                }
+
+                .action-buttons .btn {
+                    width: 100%;
+                    justify-content: center;
+                }
+
+                .no-data code {
+                    font-size: 0.8rem;
+                    padding: 0.4rem 0.8rem;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .header {
+                    padding: 1.5rem 1rem;
+                }
+
+                .header h1 {
+                    font-size: 1.3rem;
+                }
+
+                .metrics-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                table {
+                    min-width: 500px;
+                }
+
+                .btn {
+                    font-size: 0.85rem;
+                    padding: 0.5rem 1.2rem;
+                }
+            }
+
+            /* Custom scrollbar */
+            ::-webkit-scrollbar {
+                width: 6px;
+                height: 6px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #f7fafc;
+                border-radius: 10px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #cbd5e0;
+                border-radius: 10px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #a0aec0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>Sridhar Precision Works</h1>
+            <p>Production Scheduler & Disruption Management System</p>
+        </div>
+
+        <div class="container">
+            {% if schedule %}
+            <!-- Metrics Grid -->
+            <div class="metrics-grid">
+                <div class="metric-card cost">
+                    <span class="icon">💰</span>
+                    <div class="metric-label">Total Cost</div>
+                    <div class="metric-value">{{ total_cost }}</div>
+                </div>
+
+                <div class="metric-card ontime">
+                    <span class="icon">⏰</span>
+                    <div class="metric-label">On-Time Rate</div>
+                    <div class="metric-value">{{ ontime_percent }}</div>
+                </div>
+
+                <div class="metric-card robust">
+                    <span class="icon">🛡️</span>
+                    <div class="metric-label">Robustness Score</div>
+                    <div class="metric-value">{{ robustness_score }}/100</div>
+                </div>
+            </div>
+
+            <!-- Today's Operations -->
+            <div class="section">
+                <h2>Today's Operations</h2>
+                {% if today_operations %}
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Machine</th>
+                                <th>Operator</th>
+                                <th>Order</th>
+                                <th>Operation</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for op in today_operations %}
+                            <tr>
+                                <td class="time">{{ op.start_time|time:"H:i" }} – {{ op.end_time|time:"H:i" }}</td>
+                                <td><strong>{{ op.machine.machine_id }}</strong></td>
+                                <td>{{ op.operator.name|default:"—" }}</td>
+                                <td>{{ op.operation.order.order_number }}</td>
+                                <td>{{ op.operation.operation_type }}</td>
+                                <td>{{ op.operation.duration_minutes }} min</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="no-data">No operations scheduled for today</div>
+                {% endif %}
+            </div>
+
+            <!-- At-Risk Deliveries -->
+            <div class="section">
+                <h2>⚠️ At-Risk Deliveries</h2>
+                {% if at_risk_orders %}
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Customer</th>
+                                <th>Due Date</th>
+                                <th>Est. Completion</th>
+                                <th>Delay</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for oc in at_risk_orders %}
+                            <tr>
+                                <td><strong>{{ oc.order.order_number }}</strong></td>
+                                <td>{{ oc.order.customer.name }}</td>
+                                <td class="time">{{ oc.order.due_date|date:"Y-m-d H:i" }}</td>
+                                <td class="time">{{ oc.completion_time|date:"Y-m-d H:i" }}</td>
+                                <td>
+                                    {% with delay=oc.completion_time|timesince:oc.order.due_date %}
+                                    <strong style="color: #e53e3e;">+{{ delay }}</strong>
+                                    {% endwith %}
+                                </td>
+                                <td>
+                                    <span class="status-badge status-critical">LATE</span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="no-data" style="border-color: #9ae6b4;">
+                    ✓ All deliveries are on track
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="{% url 'scheduler:schedule_list' %}" class="btn btn-primary">
+                    View All Schedules
+                </a>
+                <a href="{% url 'scheduler:schedule_detail' schedule.pk %}" class="btn btn-success">
+                    View Current Schedule
+                </a>
+                <a href="/admin/" class="btn btn-secondary">
+                    Admin Panel
+                </a>
+            </div>
+
+            {% else %}
+            <!-- No Schedule State -->
+            <div class="section">
+                <div class="no-data">
+                    <h2>No Schedule Generated Yet</h2>
+                    <p>Please generate a schedule using the management command:</p>
+                    <code>python manage.py schedule --show-costs --show-metrics</code>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="footer">
+            <p>Sridhar Precision Works <span>© 2026</span> </p>
+        </div>
+    </body>
+
+</html>

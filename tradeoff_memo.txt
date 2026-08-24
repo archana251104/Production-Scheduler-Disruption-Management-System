@@ -1,0 +1,124 @@
+╔====================================================================╗
+║                                                                    ║
+║                      SRIDHAR PRECISION WORKS                       ║
+║               PRODUCTION SCHEDULE TRADE-OFF ANALYSIS               ║
+║                                                                    ║
+╚====================================================================╝
+
+EXECUTIVE SUMMARY
+----------------------------------------------------------------------
+Cheapest Strategy:     ONTIME
+Most On-Time Strategy: ONTIME
+Most Robust Strategy:  ONTIME
+
+DETAILED STRATEGY COMPARISON
+----------------------------------------------------------------------
+
+📌 ONTIME STRATEGY
+----------------------------------------------------------------------
+COST BREAKDOWN:
+  Overtime Cost:      ₹        0.00
+  Penalty Cost:       ₹        0.00
+  Changeover Cost:    ₹  183,250.00
+  Generator Cost:     ₹        0.00
+  ------------------------------------
+  TOTAL COST:         ₹  183,250.00
+
+ON-TIME PERFORMANCE:
+  Total Orders:                    25
+  On-Time:                         25
+  Late:                             0
+  On-Time %:                    100.0%
+
+ROBUSTNESS:
+  Avg Buffer Time:           229.6 min
+  Robustness Score:                   3.8/100
+
+
+📌 CHEAPEST STRATEGY
+----------------------------------------------------------------------
+COST BREAKDOWN:
+  Overtime Cost:      ₹        0.00
+  Penalty Cost:       ₹        0.00
+  Changeover Cost:    ₹  183,250.00
+  Generator Cost:     ₹        0.00
+  ------------------------------------
+  TOTAL COST:         ₹  183,250.00
+
+ON-TIME PERFORMANCE:
+  Total Orders:                    25
+  On-Time:                         25
+  Late:                             0
+  On-Time %:                    100.0%
+
+ROBUSTNESS:
+  Avg Buffer Time:           229.6 min
+  Robustness Score:                   3.8/100
+
+
+📌 ROBUST STRATEGY
+----------------------------------------------------------------------
+COST BREAKDOWN:
+  Overtime Cost:      ₹        0.00
+  Penalty Cost:       ₹        0.00
+  Changeover Cost:    ₹  183,250.00
+  Generator Cost:     ₹        0.00
+  ------------------------------------
+  TOTAL COST:         ₹  183,250.00
+
+ON-TIME PERFORMANCE:
+  Total Orders:                    25
+  On-Time:                         25
+  Late:                             0
+  On-Time %:                    100.0%
+
+ROBUSTNESS:
+  Avg Buffer Time:           229.6 min
+  Robustness Score:                   3.8/100
+
+
+RECOMMENDATION
+----------------------------------------------------------------------
+
+✓ RECOMMENDED: ONTIME STRATEGY
+
+RATIONALE:
+  • Our tier-1 customer (60% revenue) requires JIT delivery
+  • Late penalties are substantial and recurring
+  • On-time delivery is key to customer retention
+  • The extra cost in overtime/penalties is justified
+    by maintaining customer trust
+
+RISK ASSESSMENT
+----------------------------------------------------------------------
+
+ONTIME Strategy Risks:
+  • Machine breakdown → immediate reschedule required
+  • Limited buffer means cascading delays
+
+CHEAPEST Strategy Risks:
+  • High late penalties if disruptions occur
+  • JIT customer unhappy with delays
+
+ROBUST Strategy Risks:
+  • Highest cost due to buffer time
+  • Unused capacity if disruptions don't occur
+
+IMPLEMENTATION NOTES
+----------------------------------------------------------------------
+
+1. OPERATOR BRIEFING
+   • Grinding machine is critical bottleneck (only 3 operators)
+   • Any grinding operator absence → high-priority issue
+
+2. MACHINE PRIORITY
+   • Prioritize grinding machine maintenance
+   • Keep spare capacity on CNC/milling for rework
+
+3. CUSTOMER COMMUNICATION
+   • Daily ETA updates to AutoPrime Motors (tier-1)
+   • Weekly schedules to other customers
+
+4. CONTINGENCY PLANNING
+   • Keep 2-3 orders in backup queue for quick dispatch
+   • Identify orders that can absorb delays

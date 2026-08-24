@@ -1,0 +1,690 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Schedule Detail - Sridhar Precision Works</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                background: #f0f4f8;
+                color: #1a202c;
+                line-height: 1.6;
+            }
+
+            /* Modern Header with Gradient Animation */
+            .header {
+                background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+                color: white;
+                padding: 2.5rem 2rem;
+                position: relative;
+                overflow: hidden;
+                border-bottom: 4px solid #00d2ff;
+            }
+
+            .header::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle at 30% 50%, rgba(0, 210, 255, 0.1) 0%, transparent 60%);
+                animation: shimmer 8s ease-in-out infinite alternate;
+            }
+
+            @keyframes shimmer {
+                0% {
+                    transform: translateX(-20%) rotate(0deg);
+                }
+
+                100% {
+                    transform: translateX(20%) rotate(5deg);
+                }
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+                font-weight: 700;
+                letter-spacing: -0.5px;
+                position: relative;
+                z-index: 1;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .header h1::after {
+                content: '✦';
+                font-size: 1.5rem;
+                color: #00d2ff;
+                animation: pulse 2s ease-in-out infinite;
+            }
+
+            @keyframes pulse {
+
+                0%,
+                100% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+
+                50% {
+                    opacity: 0.5;
+                    transform: scale(0.9);
+                }
+            }
+
+            .header p {
+                position: relative;
+                z-index: 1;
+                opacity: 0.8;
+                font-weight: 300;
+                font-size: 1.05rem;
+            }
+
+            .container {
+                max-width: 1440px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+
+            /* Modern Card Design */
+            .section {
+                background: white;
+                border-radius: 16px;
+                padding: 2rem;
+                margin-bottom: 2rem;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+                border: 1px solid rgba(0, 0, 0, 0.04);
+                transition: transform 0.2s ease, box-shadow 0.3s ease;
+            }
+
+            .section:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            }
+
+            .section h2 {
+                font-size: 1.4rem;
+                font-weight: 600;
+                margin-bottom: 1.5rem;
+                color: #1a202c;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                border-bottom: none;
+                padding-bottom: 0.75rem;
+                border-bottom: 3px solid #e2e8f0;
+            }
+
+            .section h2::before {
+                content: '';
+                display: inline-block;
+                width: 4px;
+                height: 24px;
+                background: linear-gradient(180deg, #667eea, #764ba2);
+                border-radius: 4px;
+            }
+
+            .section h3 {
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: #2d3748;
+                margin-top: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            /* Metrics Grid - Glassmorphism style */
+            .metrics-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.25rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .metric {
+                background: linear-gradient(145deg, #f7fafc, #edf2f7);
+                padding: 1.25rem 1.5rem;
+                border-radius: 12px;
+                border-left: 5px solid #667eea;
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .metric::after {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -50%;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(circle, rgba(102, 126, 234, 0.05) 0%, transparent 70%);
+                pointer-events: none;
+            }
+
+            .metric:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            }
+
+            .metric-label {
+                font-size: 0.75rem;
+                font-weight: 600;
+                color: #4a5568;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+            }
+
+            .metric-value {
+                font-size: 1.75rem;
+                font-weight: 700;
+                color: #1a202c;
+                margin-top: 0.25rem;
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            /* Cost Section - Split Layout */
+            .cost-section {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+                margin-top: 1rem;
+            }
+
+            .cost-item {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid #edf2f7;
+                transition: background 0.2s ease;
+            }
+
+            .cost-item:hover {
+                background: #f7fafc;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+                border-radius: 4px;
+            }
+
+            .cost-item:last-child {
+                border-bottom: 3px solid #667eea;
+                font-weight: 700;
+                font-size: 1.1rem;
+                padding-top: 1rem;
+                margin-top: 0.25rem;
+            }
+
+            .cost-label {
+                color: #4a5568;
+                font-weight: 500;
+            }
+
+            .cost-value {
+                color: #764ba2;
+                font-weight: 600;
+            }
+
+            .cost-item:last-child .cost-value {
+                color: #667eea;
+                font-size: 1.2rem;
+            }
+
+            /* Modern Table Design */
+            table {
+                width: 100%;
+                border-collapse: separate;
+                border-spacing: 0;
+                border-radius: 12px;
+                overflow: hidden;
+            }
+
+            th {
+                background: #f7fafc;
+                padding: 1rem 1.25rem;
+                text-align: left;
+                font-weight: 600;
+                font-size: 0.8rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: #4a5568;
+                border-bottom: 2px solid #e2e8f0;
+            }
+
+            td {
+                padding: 1rem 1.25rem;
+                border-bottom: 1px solid #edf2f7;
+                font-size: 0.95rem;
+            }
+
+            tr:last-child td {
+                border-bottom: none;
+            }
+
+            tr:hover td {
+                background: #f7fafc;
+            }
+
+            .time {
+                font-family: 'JetBrains Mono', 'Courier New', monospace;
+                font-size: 0.85rem;
+                color: #4a5568;
+                font-weight: 500;
+            }
+
+            /* Modern Status Badges */
+            .status-badge {
+                display: inline-block;
+                padding: 0.35rem 1rem;
+                border-radius: 50px;
+                font-size: 0.75rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+                transition: all 0.3s ease;
+            }
+
+            .status-badge:hover {
+                transform: scale(1.05);
+            }
+
+            .status-on-time {
+                background: linear-gradient(135deg, #c6f6d5, #9ae6b4);
+                color: #22543d;
+                box-shadow: 0 2px 8px rgba(72, 187, 120, 0.2);
+            }
+
+            .status-late {
+                background: linear-gradient(135deg, #fed7d7, #feb2b2);
+                color: #742a2a;
+                box-shadow: 0 2px 8px rgba(245, 101, 101, 0.2);
+            }
+
+            /* Machine Schedule Cards */
+            .machine-section {
+                margin-bottom: 1.5rem;
+            }
+
+            .machine-table {
+                margin-bottom: 2rem;
+                border-radius: 12px;
+                overflow: hidden;
+                border: 1px solid #edf2f7;
+                background: white;
+                transition: box-shadow 0.3s ease;
+            }
+
+            .machine-table:hover {
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            }
+
+            .machine-title {
+                background: linear-gradient(135deg, #f7fafc, #edf2f7);
+                padding: 0.75rem 1.5rem;
+                font-weight: 700;
+                font-size: 1rem;
+                color: #2d3748;
+                border-bottom: 2px solid #e2e8f0;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .machine-title::before {
+                content: '⚙️';
+                font-size: 1.2rem;
+            }
+
+            .machine-title span {
+                background: #667eea;
+                color: white;
+                padding: 0.15rem 0.6rem;
+                border-radius: 50px;
+                font-size: 0.7rem;
+                margin-left: auto;
+            }
+
+            .machine-table table {
+                border-radius: 0;
+            }
+
+            .machine-table th {
+                background: #fafcff;
+                font-size: 0.7rem;
+            }
+
+            /* Buttons */
+            .btn {
+                padding: 0.6rem 1.5rem;
+                border: none;
+                border-radius: 50px;
+                font-size: 0.9rem;
+                font-weight: 600;
+                cursor: pointer;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                transition: all 0.3s ease;
+                margin-bottom: 1rem;
+            }
+
+            .btn-back {
+                background: #edf2f7;
+                color: #4a5568;
+                border: 1px solid #e2e8f0;
+            }
+
+            .btn-back:hover {
+                background: #e2e8f0;
+                transform: translateX(-4px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+
+            .btn-back::before {
+                content: '←';
+                font-size: 1.1rem;
+                transition: transform 0.3s ease;
+            }
+
+            .btn-back:hover::before {
+                transform: translateX(-4px);
+            }
+
+            .no-data {
+                text-align: center;
+                padding: 3rem 2rem;
+                color: #a0aec0;
+                font-style: italic;
+                background: #f7fafc;
+                border-radius: 12px;
+                border: 2px dashed #e2e8f0;
+            }
+
+            /* Footer */
+            .footer {
+                text-align: center;
+                padding: 2.5rem 2rem;
+                color: #4a5568;
+                border-top: 1px solid #edf2f7;
+                margin-top: 2rem;
+                font-size: 0.9rem;
+                background: white;
+                border-radius: 16px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            }
+
+            .footer p {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+
+            .footer span {
+                color: #667eea;
+                font-weight: 600;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .cost-section {
+                    grid-template-columns: 1fr;
+                    gap: 1rem;
+                }
+
+                .metrics-grid {
+                    grid-template-columns: 1fr 1fr;
+                }
+
+                .header h1 {
+                    font-size: 1.5rem;
+                    flex-wrap: wrap;
+                }
+
+                .container {
+                    padding: 1rem;
+                }
+
+                .section {
+                    padding: 1.25rem;
+                }
+
+                th,
+                td {
+                    padding: 0.75rem;
+                    font-size: 0.85rem;
+                }
+
+                .metric-value {
+                    font-size: 1.3rem;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .metrics-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .header {
+                    padding: 1.5rem 1rem;
+                }
+
+                .header h1 {
+                    font-size: 1.3rem;
+                }
+
+                .cost-item {
+                    flex-wrap: wrap;
+                    gap: 0.25rem;
+                }
+            }
+
+            /* Scrollable table container for mobile */
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 0 -0.5rem;
+                padding: 0 0.5rem;
+            }
+
+            .table-wrapper table {
+                min-width: 600px;
+            }
+
+            /* Custom scrollbar */
+            ::-webkit-scrollbar {
+                width: 6px;
+                height: 6px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #f7fafc;
+                border-radius: 10px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #cbd5e0;
+                border-radius: 10px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #a0aec0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>📋 Schedule Detail</h1>
+            <p>{{ schedule.name }} · Created: {{ schedule.created_at|date:"Y-m-d H:i:s" }}</p>
+        </div>
+
+        <div class="container">
+            <a href="{% url 'scheduler:schedule_list' %}" class="btn btn-back">Back to Schedules</a>
+
+            <!-- Key Metrics -->
+            <div class="section">
+                <h2>Key Metrics</h2>
+                <div class="metrics-grid">
+                    <div class="metric">
+                        <div class="metric-label">Total Cost</div>
+                        <div class="metric-value">₹{{ costs.total_cost|floatformat:0 }}</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">On-Time Rate</div>
+                        <div class="metric-value">{{ ontime_metrics.on_time_percent|floatformat:1 }}%</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Robustness</div>
+                        <div class="metric-value">{{ robustness_metrics.robustness_score|floatformat:0 }}/100</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label">Operations</div>
+                        <div class="metric-value">{{ schedule.scheduled_operations.count }}</div>
+                    </div>
+                </div>
+
+                <h3>Cost Breakdown</h3>
+                <div class="cost-section">
+                    <div>
+                        <div class="cost-item">
+                            <span class="cost-label">Overtime Cost</span>
+                            <span class="cost-value">₹{{ costs.overtime.total|floatformat:0 }}</span>
+                        </div>
+                        <div class="cost-item">
+                            <span class="cost-label">Penalty Cost</span>
+                            <span class="cost-value">₹{{ costs.penalties.total|floatformat:0 }}</span>
+                        </div>
+                        <div class="cost-item">
+                            <span class="cost-label">Changeover Cost</span>
+                            <span class="cost-value">₹{{ costs.changeovers.total|floatformat:0 }}</span>
+                        </div>
+                        <div class="cost-item">
+                            <span class="cost-label">Generator Cost</span>
+                            <span class="cost-value">₹{{ costs.generator.total|floatformat:0 }}</span>
+                        </div>
+                        <div class="cost-item">
+                            <span class="cost-label">TOTAL</span>
+                            <span class="cost-value">₹{{ costs.total_cost|floatformat:0 }}</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="cost-item">
+                            <span class="cost-label">Total Orders</span>
+                            <span class="cost-value">{{ ontime_metrics.total_orders }}</span>
+                        </div>
+                        <div class="cost-item">
+                            <span class="cost-label">On-Time Orders</span>
+                            <span class="cost-value">{{ ontime_metrics.on_time_orders }}</span>
+                        </div>
+                        <div class="cost-item">
+                            <span class="cost-label">Late Orders</span>
+                            <span class="cost-value">{{ ontime_metrics.late_orders }}</span>
+                        </div>
+                        <div class="cost-item">
+                            <span class="cost-label">Avg Buffer</span>
+                            <span class="cost-value">{{ robustness_metrics.avg_buffer_minutes|floatformat:1 }} min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Completion Schedule -->
+            <div class="section">
+                <h2>Order Completion Schedule</h2>
+                {% if orders_completed %}
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Customer</th>
+                                <th>Due Date</th>
+                                <th>Completion Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for oc in orders_completed %}
+                            <tr>
+                                <td><strong>{{ oc.order.order_number }}</strong></td>
+                                <td>{{ oc.order.customer.name }}</td>
+                                <td class="time">{{ oc.order.due_date|date:"Y-m-d H:i" }}</td>
+                                <td class="time">{{ oc.completion_time|date:"Y-m-d H:i" }}</td>
+                                <td>
+                                    {% if oc.completion_time <= oc.order.due_date %} <span class="status-badge status-on-time">On-Time</span>
+                                        {% else %}
+                                        <span class="status-badge status-late">Late</span>
+                                        {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="no-data">No operations scheduled</div>
+                {% endif %}
+            </div>
+
+            <!-- Machine Schedule -->
+            <div class="section">
+                <h2>Machine Schedule</h2>
+                {% for machine_id, ops in machine_schedule.items %}
+                <div class="machine-table">
+                    <div class="machine-title">
+                        Machine: {{ machine_id }}
+                        <span>{{ ops|length }} ops</span>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th>Duration</th>
+                                    <th>Order</th>
+                                    <th>Operation</th>
+                                    <th>Operator</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for op in ops %}
+                                <tr>
+                                    <td class="time">{{ op.start_time|time:"H:i:s" }}</td>
+                                    <td class="time">{{ op.end_time|time:"H:i:s" }}</td>
+                                    <td>{{ op.operation.duration_minutes }} min</td>
+                                    <td><strong>{{ op.operation.order.order_number }}</strong></td>
+                                    <td>{{ op.operation.operation_type }}</td>
+                                    <td>{{ op.operator.name|default:"—" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Sridhar Precision Works <span>© 2024</span> · Powered by OR-Tools Constraint Programming</p>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,594 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Schedules - Sridhar Precision Works</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                background: #f0f4f8;
+                color: #1a202c;
+                line-height: 1.6;
+            }
+
+            /* Modern Header with Gradient Animation */
+            .header {
+                background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+                color: white;
+                padding: 2.5rem 2rem;
+                position: relative;
+                overflow: hidden;
+                border-bottom: 4px solid #00d2ff;
+            }
+
+            .header::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle at 30% 50%, rgba(0, 210, 255, 0.1) 0%, transparent 60%);
+                animation: shimmer 8s ease-in-out infinite alternate;
+            }
+
+            @keyframes shimmer {
+                0% {
+                    transform: translateX(-20%) rotate(0deg);
+                }
+
+                100% {
+                    transform: translateX(20%) rotate(5deg);
+                }
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+                font-weight: 700;
+                letter-spacing: -0.5px;
+                position: relative;
+                z-index: 1;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .header h1::after {
+                content: '✦';
+                font-size: 1.5rem;
+                color: #00d2ff;
+                animation: pulse 2s ease-in-out infinite;
+            }
+
+            @keyframes pulse {
+
+                0%,
+                100% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+
+                50% {
+                    opacity: 0.5;
+                    transform: scale(0.9);
+                }
+            }
+
+            .header p {
+                position: relative;
+                z-index: 1;
+                opacity: 0.8;
+                font-weight: 300;
+                font-size: 1.05rem;
+            }
+
+            .container {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+
+            /* Modern Card Design */
+            .section {
+                background: white;
+                border-radius: 16px;
+                padding: 2rem;
+                margin-bottom: 2rem;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+                border: 1px solid rgba(0, 0, 0, 0.04);
+                transition: transform 0.2s ease, box-shadow 0.3s ease;
+            }
+
+            .section:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            }
+
+            .section h2 {
+                font-size: 1.4rem;
+                font-weight: 600;
+                margin-bottom: 1.5rem;
+                color: #1a202c;
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                border-bottom: none;
+                padding-bottom: 0.75rem;
+                border-bottom: 3px solid #e2e8f0;
+            }
+
+            .section h2::before {
+                content: '';
+                display: inline-block;
+                width: 4px;
+                height: 24px;
+                background: linear-gradient(180deg, #667eea, #764ba2);
+                border-radius: 4px;
+            }
+
+            /* Modern Table Design */
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 0 -0.5rem;
+                padding: 0 0.5rem;
+                border-radius: 12px;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: separate;
+                border-spacing: 0;
+                border-radius: 12px;
+                overflow: hidden;
+                min-width: 700px;
+            }
+
+            th {
+                background: #f7fafc;
+                padding: 1rem 1.25rem;
+                text-align: left;
+                font-weight: 600;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: #4a5568;
+                border-bottom: 2px solid #e2e8f0;
+            }
+
+            td {
+                padding: 1rem 1.25rem;
+                border-bottom: 1px solid #edf2f7;
+                font-size: 0.95rem;
+                vertical-align: middle;
+            }
+
+            tr:last-child td {
+                border-bottom: none;
+            }
+
+            tr:hover td {
+                background: #f7fafc;
+            }
+
+            /* Modern Strategy Badges */
+            .strategy-badge {
+                display: inline-block;
+                padding: 0.35rem 1rem;
+                border-radius: 50px;
+                font-size: 0.7rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+                transition: all 0.3s ease;
+            }
+
+            .strategy-badge:hover {
+                transform: scale(1.05);
+            }
+
+            .strategy-ontime {
+                background: linear-gradient(135deg, #bee3f8, #90cdf4);
+                color: #2a4365;
+                box-shadow: 0 2px 8px rgba(66, 153, 225, 0.2);
+            }
+
+            .strategy-cheapest {
+                background: linear-gradient(135deg, #c6f6d5, #9ae6b4);
+                color: #22543d;
+                box-shadow: 0 2px 8px rgba(72, 187, 120, 0.2);
+            }
+
+            .strategy-robust {
+                background: linear-gradient(135deg, #fed7d7, #feb2b2);
+                color: #742a2a;
+                box-shadow: 0 2px 8px rgba(245, 101, 101, 0.2);
+            }
+
+            .strategy-unknown {
+                background: #edf2f7;
+                color: #4a5568;
+            }
+
+            /* Timestamp styling */
+            .timestamp {
+                font-family: 'JetBrains Mono', 'Courier New', monospace;
+                font-size: 0.8rem;
+                color: #4a5568;
+                font-weight: 500;
+                background: #f7fafc;
+                padding: 0.2rem 0.6rem;
+                border-radius: 4px;
+                display: inline-block;
+            }
+
+            /* Cost Value with gradient */
+            .cost-value {
+                font-weight: 700;
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                font-size: 1.05rem;
+            }
+
+            /* Buttons */
+            .btn {
+                padding: 0.6rem 1.5rem;
+                border: none;
+                border-radius: 50px;
+                font-size: 0.85rem;
+                font-weight: 600;
+                cursor: pointer;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                transition: all 0.3s ease;
+            }
+
+            .btn-view {
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+                box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+                padding: 0.4rem 1.2rem;
+                font-size: 0.8rem;
+            }
+
+            .btn-view:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            }
+
+            .btn-view::after {
+                content: '→';
+                transition: transform 0.3s ease;
+            }
+
+            .btn-view:hover::after {
+                transform: translateX(4px);
+            }
+
+            .btn-back {
+                background: #edf2f7;
+                color: #4a5568;
+                border: 1px solid #e2e8f0;
+                margin-bottom: 1rem;
+            }
+
+            .btn-back:hover {
+                background: #e2e8f0;
+                transform: translateX(-4px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+
+            .btn-back::before {
+                content: '←';
+                font-size: 1.1rem;
+                transition: transform 0.3s ease;
+            }
+
+            .btn-back:hover::before {
+                transform: translateX(-4px);
+            }
+
+            /* Modern Pagination */
+            .pagination {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 0.35rem;
+                margin-top: 2rem;
+                padding-top: 2rem;
+                border-top: 2px solid #edf2f7;
+                flex-wrap: wrap;
+            }
+
+            .pagination a,
+            .pagination span {
+                padding: 0.5rem 0.9rem;
+                border: 2px solid #e2e8f0;
+                border-radius: 8px;
+                text-decoration: none;
+                color: #4a5568;
+                font-weight: 600;
+                font-size: 0.85rem;
+                transition: all 0.25s ease;
+                min-width: 40px;
+                text-align: center;
+            }
+
+            .pagination a:hover {
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+                border-color: #667eea;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            }
+
+            .pagination .current {
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+                border-color: #667eea;
+                box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+            }
+
+            .pagination .disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+            }
+
+            /* No Data State */
+            .no-data {
+                text-align: center;
+                padding: 4rem 2rem;
+                color: #a0aec0;
+                font-style: italic;
+                background: #f7fafc;
+                border-radius: 12px;
+                border: 2px dashed #e2e8f0;
+                font-size: 1.1rem;
+            }
+
+            .no-data::before {
+                content: '📋';
+                display: block;
+                font-size: 3rem;
+                font-style: normal;
+                margin-bottom: 1rem;
+                opacity: 0.6;
+            }
+
+            /* Footer */
+            .footer {
+                text-align: center;
+                padding: 2.5rem 2rem;
+                color: #4a5568;
+                border-top: 1px solid #edf2f7;
+                margin-top: 2rem;
+                font-size: 0.9rem;
+                background: white;
+                border-radius: 16px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            }
+
+            .footer p {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+
+            .footer span {
+                color: #667eea;
+                font-weight: 600;
+            }
+
+            /* ID styling */
+            td strong {
+                color: #2d3748;
+                font-weight: 700;
+                background: #f7fafc;
+                padding: 0.15rem 0.5rem;
+                border-radius: 4px;
+                font-size: 0.85rem;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .header h1 {
+                    font-size: 1.5rem;
+                    flex-wrap: wrap;
+                }
+
+                .container {
+                    padding: 1rem;
+                }
+
+                .section {
+                    padding: 1.25rem;
+                    border-radius: 12px;
+                }
+
+                .section h2 {
+                    font-size: 1.2rem;
+                }
+
+                th,
+                td {
+                    padding: 0.75rem;
+                    font-size: 0.85rem;
+                }
+
+                .pagination a,
+                .pagination span {
+                    padding: 0.4rem 0.7rem;
+                    font-size: 0.8rem;
+                    min-width: 35px;
+                }
+
+                .timestamp {
+                    font-size: 0.7rem;
+                }
+
+                .cost-value {
+                    font-size: 0.95rem;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .header {
+                    padding: 1.5rem 1rem;
+                }
+
+                .header h1 {
+                    font-size: 1.3rem;
+                }
+
+                .header h1::after {
+                    font-size: 1rem;
+                }
+
+                .btn {
+                    font-size: 0.8rem;
+                    padding: 0.5rem 1rem;
+                }
+
+                .btn-view {
+                    padding: 0.3rem 0.8rem;
+                    font-size: 0.7rem;
+                }
+
+                .strategy-badge {
+                    font-size: 0.6rem;
+                    padding: 0.2rem 0.7rem;
+                }
+
+                table {
+                    min-width: 550px;
+                }
+            }
+
+            /* Custom scrollbar */
+            ::-webkit-scrollbar {
+                width: 6px;
+                height: 6px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #f7fafc;
+                border-radius: 10px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #cbd5e0;
+                border-radius: 10px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #a0aec0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>Production Schedules</h1>
+            <p>Sridhar Precision Works Scheduler</p>
+        </div>
+
+        <div class="container">
+            <a href="{% url 'scheduler:dashboard' %}" class="btn btn-back">Back to Dashboard</a>
+
+            <div class="section">
+                <h2>All Schedules</h2>
+                {% if schedules %}
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Strategy</th>
+                                <th>Operations</th>
+                                <th>Total Cost</th>
+                                <th>On-Time %</th>
+                                <th>Created</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for schedule in schedules %}
+                            <tr>
+                                <td><strong>#{{ schedule.id }}</strong></td>
+                                <td>{{ schedule.name }}</td>
+                                <td>
+                                    <span class="strategy-badge strategy-{{ schedule.strategy|lower|default:'unknown' }}">
+                                        {{ schedule.strategy|default:"Unknown" }}
+                                    </span>
+                                </td>
+                                <td>{{ schedule.scheduled_operations.count }}</td>
+                                <td class="cost-value">{{ schedule.total_cost_display }}</td>
+                                <td>{{ schedule.ontime_percent|default:"—" }}</td>
+                                <td><span class="timestamp">{{ schedule.created_at|date:"Y-m-d H:i" }}</span></td>
+                                <td>
+                                    <a href="{% url 'scheduler:schedule_detail' schedule.pk %}" class="btn btn-view">
+                                        View
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                {% if is_paginated %}
+                <div class="pagination">
+                    {% if page_obj.has_previous %}
+                    <a href="?page=1">« First</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">‹ Prev</a>
+                    {% else %}
+                    <span class="disabled">« First</span>
+                    <span class="disabled">‹ Prev</span>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <span class="current">{{ num }}</span>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a href="?page={{ num }}">{{ num }}</a>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">Next ›</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">Last »</a>
+                        {% else %}
+                        <span class="disabled">Next ›</span>
+                        <span class="disabled">Last »</span>
+                        {% endif %}
+                </div>
+                {% endif %}
+                {% else %}
+                <div class="no-data">
+                    No schedules found. Generate one using the management command.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Sridhar Precision Works <span>© 2024</span></p>
+        </div>
+    </body>
+
+</html>
