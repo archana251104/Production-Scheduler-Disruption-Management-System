@@ -15,7 +15,7 @@
 
             body {
                 font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                background: #f0f4f8;
+                background: #e8edf5;
                 color: #1a202c;
                 min-height: 100vh;
                 line-height: 1.6;
@@ -23,12 +23,13 @@
 
             /* Modern Header with Gradient Animation */
             .header {
-                background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+                background: linear-gradient(135deg, #0f0c29, #1a1640, #24243e);
                 color: white;
                 padding: 2.5rem 2rem;
                 position: relative;
                 overflow: hidden;
                 border-bottom: 4px solid #00d2ff;
+                box-shadow: 0 4px 20px rgba(15, 12, 41, 0.3);
             }
 
             .header::before {
@@ -38,7 +39,7 @@
                 left: -50%;
                 width: 200%;
                 height: 200%;
-                background: radial-gradient(circle at 30% 50%, rgba(0, 210, 255, 0.1) 0%, transparent 60%);
+                background: radial-gradient(circle at 30% 50%, rgba(0, 210, 255, 0.08) 0%, transparent 60%);
                 animation: shimmer 8s ease-in-out infinite alternate;
             }
 
@@ -61,6 +62,7 @@
                 display: flex;
                 align-items: center;
                 gap: 0.75rem;
+                text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             }
 
             .header h1::after {
@@ -87,9 +89,10 @@
             .header p {
                 position: relative;
                 z-index: 1;
-                opacity: 0.8;
+                opacity: 0.85;
                 font-weight: 300;
                 font-size: 1.05rem;
+                color: #c8d6e5;
             }
 
             .container {
@@ -98,7 +101,7 @@
                 padding: 2rem;
             }
 
-            /* Modern Metrics Grid - Glassmorphism style */
+            /* Modern Metrics Grid - Enhanced contrast */
             .metrics-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -107,11 +110,11 @@
             }
 
             .metric-card {
-                background: white;
+                background: #ffffff;
                 border-radius: 16px;
                 padding: 1.75rem;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-                border: 1px solid rgba(0, 0, 0, 0.04);
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.9);
                 transition: all 0.3s ease;
                 position: relative;
                 overflow: hidden;
@@ -135,7 +138,8 @@
 
             .metric-card:hover {
                 transform: translateY(-4px);
-                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+                border-color: rgba(102, 126, 234, 0.2);
             }
 
             .metric-card.cost::before {
@@ -154,11 +158,12 @@
                 font-size: 2rem;
                 margin-bottom: 0.5rem;
                 display: block;
+                opacity: 0.9;
             }
 
             .metric-label {
                 font-size: 0.75rem;
-                font-weight: 600;
+                font-weight: 700;
                 color: #4a5568;
                 text-transform: uppercase;
                 letter-spacing: 0.08em;
@@ -167,7 +172,7 @@
 
             .metric-value {
                 font-size: 2rem;
-                font-weight: 700;
+                font-weight: 800;
                 color: #1a202c;
                 background: linear-gradient(135deg, #667eea, #764ba2);
                 -webkit-background-clip: text;
@@ -196,25 +201,25 @@
                 background-clip: text;
             }
 
-            /* Modern Card Design */
+            /* Modern Card Design - Enhanced contrast */
             .section {
-                background: white;
+                background: #ffffff;
                 border-radius: 16px;
                 padding: 2rem;
                 margin-bottom: 2rem;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-                border: 1px solid rgba(0, 0, 0, 0.04);
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+                border: 1px solid rgba(0, 0, 0, 0.05);
                 transition: transform 0.2s ease, box-shadow 0.3s ease;
             }
 
             .section:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             }
 
             .section h2 {
                 font-size: 1.4rem;
-                font-weight: 600;
+                font-weight: 700;
                 margin-bottom: 1.5rem;
                 color: #1a202c;
                 display: flex;
@@ -228,16 +233,17 @@
             .section h2::before {
                 content: '';
                 display: inline-block;
-                width: 4px;
-                height: 24px;
+                width: 5px;
+                height: 28px;
                 background: linear-gradient(180deg, #667eea, #764ba2);
                 border-radius: 4px;
+                flex-shrink: 0;
             }
 
-            /* Modern Table Design */
+            /* Modern Table Design - Enhanced readability */
             .table-wrapper {
                 overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
+                /* Removed -webkit-overflow-scrolling: touch; here */
                 margin: 0 -0.5rem;
                 padding: 0 0.5rem;
                 border-radius: 12px;
@@ -250,25 +256,27 @@
                 border-radius: 12px;
                 overflow: hidden;
                 min-width: 650px;
+                background: #ffffff;
             }
 
             th {
-                background: #f7fafc;
+                background: #f1f4f9;
                 padding: 1rem 1.25rem;
                 text-align: left;
-                font-weight: 600;
-                font-size: 0.75rem;
+                font-weight: 700;
+                font-size: 0.7rem;
                 text-transform: uppercase;
-                letter-spacing: 0.05em;
-                color: #4a5568;
-                border-bottom: 2px solid #e2e8f0;
+                letter-spacing: 0.08em;
+                color: #2d3748;
+                border-bottom: 2px solid #dce2ea;
             }
 
             td {
                 padding: 1rem 1.25rem;
-                border-bottom: 1px solid #edf2f7;
+                border-bottom: 1px solid #eef2f7;
                 font-size: 0.95rem;
                 vertical-align: middle;
+                color: #2d3748;
             }
 
             tr:last-child td {
@@ -276,25 +284,38 @@
             }
 
             tr:hover td {
-                background: #f7fafc;
+                background: #f7faff;
+            }
+
+            /* Zebra striping for better readability */
+            tr:nth-child(even) td {
+                background: #fafcff;
+            }
+
+            tr:nth-child(even):hover td {
+                background: #f5f8ff;
             }
 
             .time {
                 font-family: 'JetBrains Mono', 'Courier New', monospace;
                 font-size: 0.85rem;
-                color: #4a5568;
+                color: #2d3748;
                 font-weight: 500;
+                background: #f1f4f9;
+                padding: 0.15rem 0.6rem;
+                border-radius: 4px;
+                display: inline-block;
             }
 
-            /* Modern Status Badges */
+            /* Modern Status Badges - Enhanced contrast */
             .status-badge {
                 display: inline-block;
-                padding: 0.35rem 1rem;
+                padding: 0.35rem 1.1rem;
                 border-radius: 50px;
-                font-size: 0.75rem;
+                font-size: 0.7rem;
                 font-weight: 700;
                 text-transform: uppercase;
-                letter-spacing: 0.04em;
+                letter-spacing: 0.06em;
                 transition: all 0.3s ease;
             }
 
@@ -304,53 +325,60 @@
 
             .status-on-time {
                 background: linear-gradient(135deg, #c6f6d5, #9ae6b4);
-                color: #22543d;
-                box-shadow: 0 2px 8px rgba(72, 187, 120, 0.2);
+                color: #1a4731;
+                box-shadow: 0 2px 8px rgba(72, 187, 120, 0.25);
             }
 
             .status-late {
                 background: linear-gradient(135deg, #fed7d7, #feb2b2);
                 color: #742a2a;
-                box-shadow: 0 2px 8px rgba(245, 101, 101, 0.2);
+                box-shadow: 0 2px 8px rgba(245, 101, 101, 0.25);
             }
 
             .status-critical {
                 background: linear-gradient(135deg, #feb2b2, #fc8181);
                 color: #742a2a;
-                box-shadow: 0 2px 8px rgba(245, 101, 101, 0.3);
+                box-shadow: 0 2px 8px rgba(245, 101, 101, 0.35);
                 animation: critical-pulse 2s ease-in-out infinite;
+            }
+
+            /* New class to replace inline style */
+            .delay-text {
+                color: #e53e3e;
             }
 
             @keyframes critical-pulse {
 
                 0%,
                 100% {
-                    box-shadow: 0 2px 8px rgba(245, 101, 101, 0.3);
+                    box-shadow: 0 2px 8px rgba(245, 101, 101, 0.35);
                 }
 
                 50% {
-                    box-shadow: 0 2px 16px rgba(245, 101, 101, 0.6);
+                    box-shadow: 0 2px 20px rgba(245, 101, 101, 0.6);
                 }
             }
 
+            /* No Data - Enhanced contrast */
             .no-data {
                 text-align: center;
                 padding: 3rem 2rem;
-                color: #a0aec0;
+                color: #4a5568;
                 font-style: italic;
-                background: #f7fafc;
+                background: #f7faff;
                 border-radius: 12px;
-                border: 2px dashed #e2e8f0;
+                border: 2px dashed #dce2ea;
                 font-size: 1.05rem;
             }
 
             .no-data h2 {
                 font-size: 1.5rem;
-                color: #4a5568;
+                color: #2d3748;
                 margin-bottom: 0.5rem;
                 font-style: normal;
                 border-bottom: none;
                 padding-bottom: 0;
+                font-weight: 700;
             }
 
             .no-data h2::before {
@@ -359,20 +387,27 @@
 
             .no-data p {
                 margin: 0.5rem 0;
+                color: #4a5568;
             }
 
             .no-data code {
                 background: #edf2f7;
-                padding: 0.5rem 1rem;
+                padding: 0.5rem 1.2rem;
                 border-radius: 8px;
                 font-family: 'JetBrains Mono', 'Courier New', monospace;
                 font-size: 0.9rem;
                 color: #2d3748;
                 display: inline-block;
                 margin-top: 0.5rem;
+                border: 1px solid #dce2ea;
             }
 
-            /* Action Buttons */
+            .no-data.success {
+                border-color: #9ae6b4;
+                background: #f0fdf4;
+            }
+
+            /* Action Buttons - Enhanced contrast */
             .action-buttons {
                 display: flex;
                 gap: 1rem;
@@ -381,28 +416,29 @@
             }
 
             .btn {
-                padding: 0.6rem 1.5rem;
+                padding: 0.65rem 1.75rem;
                 border: none;
                 border-radius: 50px;
                 font-size: 0.9rem;
-                font-weight: 600;
+                font-weight: 700;
                 cursor: pointer;
                 text-decoration: none;
                 display: inline-flex;
                 align-items: center;
                 gap: 0.5rem;
                 transition: all 0.3s ease;
+                letter-spacing: 0.02em;
             }
 
             .btn-primary {
                 background: linear-gradient(135deg, #667eea, #764ba2);
                 color: white;
-                box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.35);
             }
 
             .btn-primary:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+                transform: translateY(-3px);
+                box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
             }
 
             .btn-primary::after {
@@ -416,38 +452,39 @@
 
             .btn-secondary {
                 background: #edf2f7;
-                color: #4a5568;
-                border: 1px solid #e2e8f0;
+                color: #2d3748;
+                border: 2px solid #dce2ea;
             }
 
             .btn-secondary:hover {
                 background: #e2e8f0;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                transform: translateY(-3px);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+                border-color: #cbd5e0;
             }
 
             .btn-success {
                 background: linear-gradient(135deg, #48bb78, #38a169);
                 color: white;
-                box-shadow: 0 2px 10px rgba(72, 187, 120, 0.3);
+                box-shadow: 0 4px 15px rgba(72, 187, 120, 0.35);
             }
 
             .btn-success:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 20px rgba(72, 187, 120, 0.4);
+                transform: translateY(-3px);
+                box-shadow: 0 6px 25px rgba(72, 187, 120, 0.5);
             }
 
-            /* Footer */
+            /* Footer - Enhanced contrast */
             .footer {
                 text-align: center;
                 padding: 2.5rem 2rem;
                 color: #4a5568;
-                border-top: 1px solid #edf2f7;
+                border-top: 1px solid #dce2ea;
                 margin-top: 2rem;
                 font-size: 0.9rem;
-                background: white;
+                background: #ffffff;
                 border-radius: 16px;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
             }
 
             .footer p {
@@ -460,7 +497,7 @@
 
             .footer span {
                 color: #667eea;
-                font-weight: 600;
+                font-weight: 700;
             }
 
             /* Responsive */
@@ -546,22 +583,22 @@
 
             /* Custom scrollbar */
             ::-webkit-scrollbar {
-                width: 6px;
-                height: 6px;
+                width: 8px;
+                height: 8px;
             }
 
             ::-webkit-scrollbar-track {
-                background: #f7fafc;
+                background: #e8edf5;
                 border-radius: 10px;
             }
 
             ::-webkit-scrollbar-thumb {
-                background: #cbd5e0;
+                background: #c4cdd9;
                 border-radius: 10px;
             }
 
             ::-webkit-scrollbar-thumb:hover {
-                background: #a0aec0;
+                background: #a8b5c7;
             }
         </style>
     </head>
@@ -614,7 +651,7 @@
                         <tbody>
                             {% for op in today_operations %}
                             <tr>
-                                <td class="time">{{ op.start_time|time:"H:i" }} – {{ op.end_time|time:"H:i" }}</td>
+                                <td><span class="time">{{ op.start_time|time:"H:i" }} – {{ op.end_time|time:"H:i" }}</span></td>
                                 <td><strong>{{ op.machine.machine_id }}</strong></td>
                                 <td>{{ op.operator.name|default:"—" }}</td>
                                 <td>{{ op.operation.order.order_number }}</td>
@@ -651,11 +688,11 @@
                             <tr>
                                 <td><strong>{{ oc.order.order_number }}</strong></td>
                                 <td>{{ oc.order.customer.name }}</td>
-                                <td class="time">{{ oc.order.due_date|date:"Y-m-d H:i" }}</td>
-                                <td class="time">{{ oc.completion_time|date:"Y-m-d H:i" }}</td>
+                                <td><span class="time">{{ oc.order.due_date|date:"Y-m-d H:i" }}</span></td>
+                                <td><span class="time">{{ oc.completion_time|date:"Y-m-d H:i" }}</span></td>
                                 <td>
                                     {% with delay=oc.completion_time|timesince:oc.order.due_date %}
-                                    <strong style="color: #e53e3e;">+{{ delay }}</strong>
+                                    <strong class="delay-text">+{{ delay }}</strong>
                                     {% endwith %}
                                 </td>
                                 <td>
@@ -667,7 +704,7 @@
                     </table>
                 </div>
                 {% else %}
-                <div class="no-data" style="border-color: #9ae6b4;">
+                <div class="no-data success">
                     ✓ All deliveries are on track
                 </div>
                 {% endif %}
