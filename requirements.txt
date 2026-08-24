@@ -1,3 +1,4 @@
+gunicorn
 absl-py==2.5.0
 asgiref==3.12.1
 Django==6.1
